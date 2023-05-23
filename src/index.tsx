@@ -5,6 +5,7 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PostList from "./components/PostList/PostList";
+import Info from "./components/Info/Info";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         path: "",
         element: <PostList />,
       },
+      {
+        path: "/info",
+        element: <Info />
+      }
     ],
   },
 ]);

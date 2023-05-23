@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-function App() {
+function App() { 
   return (
     <ThemeProvider>
       <div className="App">

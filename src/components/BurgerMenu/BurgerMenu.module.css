@@ -6,6 +6,7 @@
   background-color: #212529;
   width: 200px;
   transition: left 0.3s ease;
+  z-index: 100;
 }
 .burgerMenu.active {
   left: 0;
