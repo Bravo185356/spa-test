@@ -1,0 +1,14 @@
+.burgerBody {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+}
+.burgerItem {
+  width: 100%;
+  height: 3px;
+  background-color: rgb(255, 255, 255);
+}

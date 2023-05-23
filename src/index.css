@@ -1,0 +1,10 @@
+.App {
+    min-height: 100vh;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: white;
+}

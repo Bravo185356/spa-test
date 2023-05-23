@@ -4,12 +4,19 @@ import App from "./App";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PostList from "./components/PostList/PostList";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  }
+    children: [
+      {
+        path: "",
+        element: <PostList />,
+      },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
