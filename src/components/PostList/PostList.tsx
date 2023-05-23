@@ -6,27 +6,26 @@ import classes from "./PostList.module.css";
 import Loader from "../../UI/Loader/Loader";
 import PostItem from "../PostItem/PostItem";
 import { usePageLoaded } from "../../hooks/usePageLoaded";
+import { addMorePosts, getPosts } from "../../store/PostSlice/PostSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/TypedStore";
 
 export default function PostList() {
-  const [posts, setPosts] = useState<IPost[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const posts = useAppSelector((state) => state.posts.value);
 
   const pageLoaded = usePageLoaded();
 
   useEffect(() => {
-    getPosts();
+    dispatch(getPosts());
   }, []);
-
-  async function getPosts(currentPage = 1) {
-    const postList = await PostApi.getPosts(currentPage);
-    setPosts([...posts, ...postList!]);
-  }
 
   async function loadMorePosts() {
     setIsLoaded(true);
     setTimeout(() => setIsLoaded(false), 500);
-    getPosts(currentPage + 1);
+    dispatch(addMorePosts(currentPage + 1));
     setCurrentPage(currentPage + 1);
   }
 
@@ -35,7 +34,7 @@ export default function PostList() {
       {!pageLoaded ? (
         <Loader />
       ) : (
-        <Container className={classes.postsWrap}>
+        <Container>
           <Stack className={classes.postList} gap={3}>
             {posts?.map((post) => {
               return <PostItem key={post.id} post={post} />;

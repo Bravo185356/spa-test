@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IPost } from "../../model";
 import classes from "./PostItem.module.css";
-import { Button, Card, Image, Row } from "react-bootstrap";
+import { Button, Card, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CommentList from "../CommentList/CommentList";
 
