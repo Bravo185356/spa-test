@@ -1,5 +1,7 @@
 .card {
-    flex-direction: row;
-    align-items: center;
+    align-items: start;
     padding: 10px;
+}
+.body {
+    margin: 10px 0px;
 }
