@@ -5,19 +5,21 @@ import { put } from "redux-saga/effects";
 
 interface PostsState {
   value: IPost[];
+  total: number;
 }
 
 const initialState: PostsState = {
   value: [],
+  total: 0,
 };
 
-export function* getPostList(): any {
-  const posts = yield PostApi.getPosts();
-  yield put(setPosts(posts));
+export function* fetchPostList(): any {
+  const response = yield PostApi.getPosts();
+  yield put(setPosts(response));
 }
 
-export function* getMorePosts({ payload }: any): any {
-  const posts = yield PostApi.getPosts(payload);
+export function* fetchMorePosts({ payload }: any): any {
+  const { posts } = yield PostApi.getPosts(payload);
   yield put(addPosts(posts));
 }
 
@@ -26,7 +28,8 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     setPosts(state, action) {
-      state.value = action.payload;
+      state.value = action.payload.posts;
+      state.total = action.payload.total;
     },
     addPosts(state, action) {
       state.value.push(...action.payload);
@@ -34,11 +37,11 @@ const postSlice = createSlice({
   },
 });
 
-export const GET_POSTS = "posts/getPosts";
-export const getPosts = createAction(GET_POSTS);
+export const POSTS = "posts/getPosts";
+export const getPosts = createAction(POSTS);
 
 export const MORE_POSTS = "posts/morePosts";
-export const addMorePosts = createAction<number>(MORE_POSTS);
+export const getMorePosts = createAction<number>(MORE_POSTS);
 
 export const { setPosts, addPosts } = postSlice.actions;
 export default postSlice.reducer;

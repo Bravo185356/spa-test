@@ -20,7 +20,7 @@ export default function CommentList({ postId }: CommentListProps) {
 
   async function fetchComments() {
     const commentList = await CommentApi.getComments(postId);
-    setComments(commentList);
+    setComments(commentList!);
   }
   return (
     <div className={classes.list}>

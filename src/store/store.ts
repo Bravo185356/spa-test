@@ -1,18 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { takeEvery } from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
-import posts, { getPostList, GET_POSTS, getMorePosts, MORE_POSTS } from "./PostSlice/PostSlice";
+import posts, { fetchPostList, POSTS, fetchMorePosts, MORE_POSTS } from "./PostSlice/PostSlice";
+import user, { USER, USER_POSTS, MORE_USER_POSTS, fetchUser, fetchUserPosts, fetchMoreUserPosts } from "./UserSlice/UserSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
 function* sagas() {
-  yield takeEvery(GET_POSTS, getPostList);
-  yield takeEvery(MORE_POSTS, getMorePosts);
+  yield takeEvery(POSTS, fetchPostList);
+  yield takeEvery(MORE_POSTS, fetchMorePosts);
+
+  yield takeEvery(USER, fetchUser);
+  yield takeEvery(USER_POSTS, fetchUserPosts);
+  yield takeEvery(MORE_USER_POSTS, fetchMoreUserPosts);
 }
 
 export const store = configureStore({
   reducer: {
     posts,
+    user,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
